@@ -174,11 +174,6 @@
                 setAn();
                 setDate();
 
-                if ($('#mobile').is(':visible'))
-                    addRowOnMobile();
-                else
-                    addRow();
-
                 $('#date-submission').trigger('change');
             })
 
@@ -242,9 +237,10 @@
             })
 
             $('#print').on('click', function() {
-                let dataLocal = JSON.parse(localStorage.getItem('data'));
-                if (!dataLocal) return alert('Datanya masih kosong!');
-                if (dataLocal.expanses.length == 0) return alert('Simpan dulu baru print!');
+                setDataToLocal();
+
+                const dataLocal = JSON.parse(localStorage.getItem('data')) || {};
+                if (Object.keys(dataLocal).length === 0) return alert('Datanya masih kosong!');
 
                 window.open('print.html');
             })
@@ -259,12 +255,25 @@
                 let pn = $('#project-name');
                 let c = $('#client');
 
-                let dataLocal = JSON.parse(localStorage.getItem('data'));
+                let dataLocal = JSON.parse(localStorage.getItem('data')) || {};
+
+                if (Object.keys(dataLocal).length == 0) return;
 
                 if (dataLocal.name != '') n.val(dataLocal.name);
                 if (dataLocal.dept != '') d.val(dataLocal.dept);
                 if (dataLocal.dept != '') pn.val(dataLocal.project_name);
                 if (dataLocal.dept != '') c.val(dataLocal.client);
+
+                for (let i = 0; i < dataLocal.expanses.length; i++) {
+                    const ex = dataLocal.expanses[i];
+                    if (ex != null) {
+                        if ($('#mobile').is(':visible'))
+                            addRowOnMobile(ex);
+                        else
+                            addRow(ex);
+                    }
+                    
+                }
             }
 
             function setDate() {
@@ -274,8 +283,14 @@
                 dateInput.val(formattedDate);
             }
 
-            function addRow() {
+            function addRow(ex = false) {
                 let rowCount = $('#tableRembes tbody tr').length + 1;
+                let currentDate = ex ? ex.date : '';
+                let currentDescription = ex ? ex.description : '';
+                let currentAmount = ex ? ex.amount : '';
+                let currentAttachment = ex ? ex.attachment : '#';
+                let isImageShow = !ex.attachment ? 'display:none;' : ''
+
                 let tr = `
                     <tr class="bg-white shadow-md">
                         <td class="px-4 py-2 rounded-l-md font-medium text-center text-gray-500 increment-number">${rowCount}</td>
@@ -284,15 +299,19 @@
                                 type="date"
                                 name="date"
                                 class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
-                                onchange="setExpanse(this, event)">
+                                onchange="setExpanse(this, event)"
+                                value="${currentDate}">
                         </td>
                         <td class="px-4 py-2">
-                            <input
-                                type="text"
-                                name="description"
-                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
-                                placeholder="Ngapain?"
-                                oninput="setExpanse(this, event)">
+                            <select name="description" id="description" onchange="setExpanse(this, event)" class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500">
+                                <option value="">Pilih</option>
+                                <option value="Makan">Makan</option>
+                                <option value="Makan + Makan Malam">Makan + Makan Malam</option>
+                                <option value="Parkir">Parkir</option>
+                                <option value="Parkir (Extend membership)">Parkir (Extend membership)</option>
+                                <option value="Bensin Kendaraan">Bensin Kendaraan</option>
+                                <option value="Bensin Kendaraan + Bensin Kemarin">Bensin Kendaraan + Bensin Kemarin</option>
+                            </select>
                         </td>
                         <td class="px-4 py-2">
                             <input
@@ -300,7 +319,8 @@
                                 name="amount"
                                 class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
                                 placeholder="Habis berapa?"
-                                oninput="setExpanse(this, event)">
+                                oninput="setExpanse(this, event)"
+                                value="${currentAmount}">
                         </td>
                         <td class="px-4 py-2">
                             <div class="flex gap-4">
@@ -309,7 +329,7 @@
                                     name="attachment"
                                     class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500 self-center"
                                     onchange="setExpanse(this, event)">
-                                <img src="#" class="image-thumb border-2 rounded" alt="Image Preview" style="display:none; width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
+                                <img src="${currentAttachment}" class="image-thumb border-2 rounded" alt="Image Preview" style="${isImageShow} width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
                             </div>
                         </td>
                         <td class="px-4 py-2 rounded-r-md text-center">
@@ -322,8 +342,13 @@
                 $('#tableRembes tbody').append(tr);
             }
 
-            function addRowOnMobile() {
+            function addRowOnMobile(ex = false) {
                 let elCount = $('.mobile-form').length + 1;
+                let currentDate = ex ? ex.date : '';
+                let currentDescription = ex ? ex.description : '';
+                let currentAmount = ex ? ex.amount : '';
+                let currentAttachment = ex ? ex.attachment : '#';
+                let isImageShow = !ex.attachment ? 'display:none;' : ''
                 
                 let el = `
                     <div class="p-2 border-t border-gray-900/25 min-[320px]:px-7 bg-slate-100 mobile-form">
@@ -341,32 +366,37 @@
                                 type="date"
                                 name="date"
                                 class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
-                                onchange="setExpanse(this, event)">
-                            <input
-                                type="text"
-                                name="description"
-                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
-                                placeholder="Ngapain?"
-                                oninput="setExpanse(this, event)">
+                                onchange="setExpanse(this, event)"
+                                value="${currentDate}">
+                            <select name="description" id="description" onchange="setExpanse(this, event)" class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500">
+                                <option value="">Pilih</option>
+                                <option value="Makan">Makan</option>
+                                <option value="Makan + Makan Malam">Makan + Makan Malam</option>
+                                <option value="Parkir">Parkir</option>
+                                <option value="Parkir (Extend membership)">Parkir (Extend membership)</option>
+                                <option value="Bensin Kendaraan">Bensin Kendaraan</option>
+                                <option value="Bensin Kendaraan + Bensin Kemarin">Bensin Kendaraan + Bensin Kemarin</option>
+                            </select>
                             <input
                                 type="number"
                                 name="amount"
                                 class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
                                 placeholder="Habis berapa?"
-                                oninput="setExpanse(this, event)">
+                                oninput="setExpanse(this, event)"
+                                value="${currentAmount}">
                             <div class="flex gap-4">
                                 <input
                                     type="file"
                                     name="attachment"
                                     class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500 self-center"
                                     onchange="setExpanse(this, event)">
-                                <img src="#" class="image-thumb border-2 rounded" alt="Image Preview" style="display:none; width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
+                                <img src="${currentAttachment}" class="image-thumb border-2 rounded" alt="Image Preview" style="${isImageShow} width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
                             </div>
                         </div>
                     </div>
                 `;
 
-                $('#mobile').prepend(el);
+                $('#mobile').append(el);
             }
 
             function setInput(key, value) {
@@ -417,6 +447,10 @@
             function setDataToLocal() {
                 let convertData = JSON.stringify(data);
                 localStorage.setItem('data', convertData);
+            }
+
+            function clearDataLocal() {
+                localStorage.removeItem('data');
             }
         </script>
     </body>
