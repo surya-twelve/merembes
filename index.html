@@ -76,6 +76,7 @@
                                     <th scope="col" class="px-4 py-4">Description of Expenses</th>
                                     <th scope="col" class="px-4 py-4">Amount</th>
                                     <th scope="col" class="px-4 py-4">Attachment</th>
+                                    <th scope="col" class="px-4 py-4">Other</th>
                                     <th scope="col" class="px-4 py-4 rounded-r-md"></th>
                                 </tr>
                             </thead>
@@ -135,11 +136,12 @@
                     </div>
 
                     <div class="flex justify-center gap-4">
-                        <button type="button" id="save" class="min-[320px]:w-full min-[320px]:ml-7 min-[320px]:mb-7 md:w-max md:m-0 text-center rounded-md bg-white px-7 py-2.5 text-sm font-semibold text-gray-500 shadow-md hover:bg-slate-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan dulu</button>
+                        <button type="button" id="clearData" class="text-center rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Hapus data</button>
+                        <button type="button" id="save" class="text-center rounded-md bg-white px-7 py-2.5 text-sm font-semibold text-gray-500 shadow-md hover:bg-slate-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan dulu</button>
                         <button 
                             type="button"
                             id="print"
-                            class="min-[320px]:w-full min-[320px]:mr-7 min-[320px]:mb-7 md:w-max md:m-0 text-center rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            class="text-center rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Print
                         </button>
                     </div>
@@ -177,6 +179,10 @@
                 $('#date-submission').trigger('change');
             })
 
+            $('#clearData').click(function() {
+                clearDataLocal();
+            })
+
             $('#addRow').click(function() {
                 addRow();
             });
@@ -187,7 +193,7 @@
 
             $('#tableRembes').on('click', '.remove-row', function() {
                 let countTr = $('#tableRembes tbody tr').length;
-                if (countTr > 1) {
+                if (countTr !== 0) {
                     let row = $(this).closest('tr');
                     let rowIndex = row.find('input[name="index_row"]').val();
 
@@ -289,6 +295,7 @@
                 let currentDescription = ex ? ex.description : '';
                 let currentAmount = ex ? ex.amount : '';
                 let currentAttachment = ex ? ex.attachment : '#';
+                let currentOther = ex ? ex.other : '';
                 let isImageShow = !ex.attachment ? 'display:none;' : ''
 
                 let tr = `
@@ -303,15 +310,13 @@
                                 value="${currentDate}">
                         </td>
                         <td class="px-4 py-2">
-                            <select name="description" id="description" onchange="setExpanse(this, event)" class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500">
-                                <option value="">Pilih</option>
-                                <option value="Makan">Makan</option>
-                                <option value="Makan + Makan Malam">Makan + Makan Malam</option>
-                                <option value="Parkir">Parkir</option>
-                                <option value="Parkir (Extend membership)">Parkir (Extend membership)</option>
-                                <option value="Bensin Kendaraan">Bensin Kendaraan</option>
-                                <option value="Bensin Kendaraan + Bensin Kemarin">Bensin Kendaraan + Bensin Kemarin</option>
-                            </select>
+                            <input
+                                type="text"
+                                name="description"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                placeholder="Ngapain?"
+                                oninput="setExpanse(this, event)"
+                                value="${currentDescription}">
                         </td>
                         <td class="px-4 py-2">
                             <input
@@ -331,6 +336,14 @@
                                     onchange="setExpanse(this, event)">
                                 <img src="${currentAttachment}" class="image-thumb border-2 rounded" alt="Image Preview" style="${isImageShow} width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
                             </div>
+                        </td>
+                        <td class="px-4 py-2">
+                            <input
+                                type="text"
+                                name="other"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                oninput="setExpanse(this, event)"
+                                value="${currentOther}">
                         </td>
                         <td class="px-4 py-2 rounded-r-md text-center">
                             <span class="text-xl text-gray-500 font-bold cursor-pointer remove-row">&times;</span>
@@ -368,15 +381,12 @@
                                 class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
                                 onchange="setExpanse(this, event)"
                                 value="${currentDate}">
-                            <select name="description" id="description" onchange="setExpanse(this, event)" class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500">
-                                <option value="">Pilih</option>
-                                <option value="Makan">Makan</option>
-                                <option value="Makan + Makan Malam">Makan + Makan Malam</option>
-                                <option value="Parkir">Parkir</option>
-                                <option value="Parkir (Extend membership)">Parkir (Extend membership)</option>
-                                <option value="Bensin Kendaraan">Bensin Kendaraan</option>
-                                <option value="Bensin Kendaraan + Bensin Kemarin">Bensin Kendaraan + Bensin Kemarin</option>
-                            </select>
+                            <input
+                                type="text"
+                                name="description"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                placeholder="Ngapain?"
+                                oninput="setExpanse(this, event)">
                             <input
                                 type="number"
                                 name="amount"
@@ -451,6 +461,7 @@
 
             function clearDataLocal() {
                 localStorage.removeItem('data');
+                location.reload()
             }
         </script>
     </body>

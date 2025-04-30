@@ -214,6 +214,7 @@
                                 date: item.date,
                                 description: item.description,
                                 amount: parseInt(item.amount),
+                                other: item.other,
                                 index: Object.keys(mergedData).length + 1
                             };
                         }
@@ -231,7 +232,7 @@
                             <td>${formatDate(item.date)}</td>
                             <td>${item.description}</td>
                             <td>${formatRupiah(item.amount.toString())}</td>
-                            <td></td>
+                            <td>${item.other}</td>
                         </tr>
                     `;
                 }
