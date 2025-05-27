@@ -1,307 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Air Merembes | Print</title>
-        <style>
-            * {
-                font-family: Calibri;
-                margin: 0;
-                font-size: 10px;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Air Merembes | Print</title>
+    <style>
+        * {
+            font-family: Calibri;
+            margin: 0;
+            font-size: 10px;
+        }
+
+        .box {
+            border: 1px solid rgb(36, 36, 36);
+            padding: 15px;
+            margin-top: 5px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.8rem;
+        }
+
+        .table th {
+            border: 1px solid rgb(36, 36, 36);
+            padding: 5px 12px 5px 12px;
+        }
+
+        .table td {
+            border: 1px solid rgb(36, 36, 36);
+            padding: 8px 12px 8px 12px;
+        }
+
+        .table th {
+            border-bottom: unset;
+            border-bottom-style: double;
+        }
+
+        .section-header {
+            margin-top: 10px;
+        }
+
+        .section-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .info-project {
+            display: flex;
+        }
+
+        .header-text-desc {
+            margin: 5px 0 15px 0;
+        }
+
+        .header-text-desc>p {
+            font-size: 8px;
+        }
+
+        .bg-header {
+            background-color: #5fb3ba;
+            padding: 0.8rem;
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        @media print {
+            @page {
+                margin-left: 5mm;
+                margin-right: 5mm;
             }
-            .box {
-                border: 1px solid rgb(36, 36, 36);
-                padding: 15px;
-                margin-top: 5px;
+
+            thead {
+                display: table-row-group;
             }
 
-            .table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 1.8rem;
+            .attachment {
+                page-break-before: always;
             }
 
-            .table th {
-                border: 1px solid rgb(36, 36, 36);
-                padding: 5px 12px 5px 12px;
+            .date-group {
+                page-break-inside: avoid;
             }
 
-            .table td {
-                border: 1px solid rgb(36, 36, 36);
-                padding: 8px 12px 8px 12px;
+            .attachment-item {
+                page-break-inside: avoid;
             }
 
-            .table th {
-                border-bottom: unset;
-                border-bottom-style: double;
+            img {
+                page-break-inside: avoid;
+                max-width: 200px !important;
             }
 
-            .section-header {
-                margin-top: 10px;
+            /* Pastikan setiap group tanggal mulai di halaman baru jika hampir penuh */
+            .date-group:not(:first-child) {
+                page-break-before: auto;
             }
+        }
+    </style>
+</head>
 
-            .section-info {
-                display: flex;
-                justify-content: space-between;
-                align-items: end;
-            }
-
-            .info-project {
-                display: flex;
-            }
-
-            .header-text-desc {
-                margin: 5px 0 15px 0;
-            }
-
-            .header-text-desc > p {
-                font-size: 8px;
-            }
-
-            @media print {
-                @page {
-                    margin-left: 5mm;
-                    margin-right: 5mm;
-                }
-
-                thead {
-                    display: table-row-group;
-                }
-
-                .attachment {
-                    page-break-before: always;
-                }
-            }
-        </style>
-    </head>
-
-    <body>
-
-        <div class="box">
-            <div class="section-header">
-                <div class="header-content">
-                    <div class="header-text-title">
-                        <h1 style="font-size: 2rem !important; text-decoration: underline;">Reimbursement Form Project</h1>
-                        <b style="font-size: 11px;">as Petty Cash Voucher (sekaligus sebagai bukti pengeluaran petty cash)</b>
-                        <img src="sgo-logo.png" width="200px" style="position: absolute; right: 1%; top: 0; margin-top: 30px;">
-                    </div>
-                    <hr style="width: 77%;">
-                    <hr style="width: 77%;">
-                    <div class="header-text-desc">
-                        <p style="margin-bottom: .2rem;">Untuk parkir di client, akomodasi proyek, dan keperluan sehubungan dgn fase proyek lainnya.</p>
-                        <p>Harus disertai bon/kwitansi. Tanpa bon/kwitansi aseli tidak akan di reimbursh.</p>
-                    </div>
+<body>
+    <div class="box">
+        <div class="section-header">
+            <div class="header-content">
+                <div class="header-text-title">
+                    <h1 style="font-size: 2rem !important; text-decoration: underline">Reimbursement Form Project</h1>
+                    <b style="font-size: 11px">as Petty Cash Voucher (sekaligus sebagai bukti pengeluaran petty cash)</b>
+                    <img src="sgo-logo.png" width="200px" style="position: absolute; right: 1%; top: 0; margin-top: 30px" />
+                </div>
+                <hr style="width: 77%" />
+                <hr style="width: 77%" />
+                <div class="header-text-desc">
+                    <p style="margin-bottom: 0.2rem">
+                        Untuk parkir di client, akomodasi proyek, dan keperluan sehubungan
+                        dgn fase proyek lainnya.
+                    </p>
+                    <p>
+                        Harus disertai bon/kwitansi. Tanpa bon/kwitansi aseli tidak akan
+                        di reimbursh.
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <div class="section-info">
-                <div class="info-project">
-                    <span style="margin-right: 50px;">
-                        <p style="margin-bottom: .5rem;">Name : <span id="name"></span></p>
-                        <p>Dept : <span id="dept"></span></p>
-                    </span>
-                    <span>
-                        <p style="margin-bottom: .5rem;">Project Name : <span id="projectName"></span></p>
-                        <p>Client : <span id="client"></span></p>
-                    </span>
-                </div>
-                <div class="number-doc">
-                    <span>No : _______ /FR/_______ /<span class="doc-year"></span> </span>
-                </div>
+        <div class="section-info">
+            <div class="info-project">
+                <span style="margin-right: 50px">
+                    <p style="margin-bottom: 0.5rem">Name : <span id="name"></span></p>
+                    <p>Dept : <span id="dept"></span></p>
+                </span>
+                <span>
+                    <p style="margin-bottom: 0.5rem">
+                        Project Name : <span id="projectName"></span>
+                    </p>
+                    <p>Client : <span id="client"></span></p>
+                </span>
             </div>
+            <div class="number-doc">
+                <span>No : _______ /FR/_______ /<span class="doc-year"></span> </span>
+            </div>
+        </div>
 
-            <table class="table" id="tableExpanse">
-                <thead>
-                    <tr>
-                        <th width="3%">No</th>
-                        <th width="13%">Date</th>
-                        <th>Description of Expanses</th>
-                        <th width="15%">Amount</th>
-                        <th width="20%"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="3" style="text-align: right;font-weight: bold;">TOTAL</td>
-                        <td style="font-weight: bold;">
-                            <span id="totalExpanse"></span>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="font-style: italic; padding: 10px 0 10px 0;text-align: center;">Note :</td>
-                        <td colspan="4"></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <table class="table" style="margin-top: 15px !important;">
+        <table class="table" id="tableExpanse">
+            <thead>
                 <tr>
-                    <td width="25%" style="padding: 0 12px 0 12px;">
-                        <div style="display: flex; flex-direction: column;gap: 5px;">
-                            <b style="text-decoration: underline;">Requested By (pemohon) :</b>
-                            <img src="#" id="signature" width="100px" height="59px" style="align-self: center;">
-                            <span style="text-align: center;" id="signatureName"></span>
-                            <span style="padding: 0 20px 0 20px;">Date : <span id="signatureDate"></span></span>
-                        </div>
-                    </td>
-                    <td width="25%" style="padding: 0 12px 0 12px;">
-                        <div style="display: flex; flex-direction: column;gap: 5px;">
-                            <b style="text-decoration: underline;">Approved By (Koord/Team Ldr) :</b>
-                            <div style="height: 59px;"></div>
-                            <span style="text-align: center;">(_____________________)</span>
-                            <span style="padding: 0 20px 0 20px;">Date : </span>
-                        </div>
-                    </td>
-                    <td width="25%" style="padding: 0 12px 0 12px;">
-                        <div style="display: flex; flex-direction: column;gap: 5px;">
-                            <b style="text-decoration: underline;">Plafon & Doc Checked (Adm):</b>
-                            <div style="height: 59px;"></div>
-                            <span style="text-align: center;">(_____________________)</span>
-                            <span style="padding: 0 20px 0 20px;">Date : </span>
-                        </div>
-                    </td>
-                    <td width="25%" style="padding: 0 12px 0 12px;">
-                        <div style="display: flex; flex-direction: column;gap: 5px;">
-                            <b style="text-decoration: underline;">Paid By (Finance):</b>
-                            <div style="height: 59px;"></div>
-                            <span style="text-align: center;">(_____________________)</span>
-                            <span style="padding: 0 20px 0 20px;">Date : </span>
-                        </div>
-                    </td>
+                    <th width="3%">No</th>
+                    <th width="13%">Date</th>
+                    <th>Description of Expanses</th>
+                    <th width="15%">Amount</th>
+                    <th width="20%"></th>
                 </tr>
-            </table>
-        </div>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" style="text-align: right; font-weight: bold">
+                        TOTAL
+                    </td>
+                    <td style="font-weight: bold">
+                        <span id="totalExpanse"></span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="font-style: italic; padding: 10px 0 10px 0; text-align: center;">
+                        Note :
+                    </td>
+                    <td colspan="4"></td>
+                </tr>
+            </tbody>
+        </table>
 
-        <div class="attachment">
-        </div>
+        <table class="table" style="margin-top: 15px !important">
+            <tr>
+                <td width="25%" style="padding: 0 12px 0 12px">
+                    <div style="display: flex; flex-direction: column; gap: 5px">
+                        <b style="text-decoration: underline">Requested By (pemohon) :</b>
+                        <img src="#" id="signature" width="100px" height="59px" style="align-self: center" />
+                        <span style="text-align: center" id="signatureName"></span>
+                        <span style="padding: 0 20px 0 20px">Date : <span id="signatureDate"></span></span>
+                    </div>
+                </td>
+                <td width="25%" style="padding: 0 12px 0 12px">
+                    <div style="display: flex; flex-direction: column; gap: 5px">
+                        <b style="text-decoration: underline">Approved By (Koord/Team Ldr) :</b>
+                        <div style="height: 59px"></div>
+                        <span style="text-align: center">(_____________________)</span>
+                        <span style="padding: 0 20px 0 20px">Date : </span>
+                    </div>
+                </td>
+                <td width="25%" style="padding: 0 12px 0 12px">
+                    <div style="display: flex; flex-direction: column; gap: 5px">
+                        <b style="text-decoration: underline">Plafon & Doc Checked (Adm):</b>
+                        <div style="height: 59px"></div>
+                        <span style="text-align: center">(_____________________)</span>
+                        <span style="padding: 0 20px 0 20px">Date : </span>
+                    </div>
+                </td>
+                <td width="25%" style="padding: 0 12px 0 12px">
+                    <div style="display: flex; flex-direction: column; gap: 5px">
+                        <b style="text-decoration: underline">Paid By (Finance):</b>
+                        <div style="height: 59px"></div>
+                        <span style="text-align: center">(_____________________)</span>
+                        <span style="padding: 0 20px 0 20px">Date : </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                loadData();
-                setDocYearNumber();
-                window.print();
-            })
-            
-            function loadData() {
-                let data = JSON.parse(localStorage.getItem('data'));
+    <div class="attachment"></div>
 
-                $('#name').text(data.name);
-                $('#dept').text(data.dept);
-                $('#projectName').text(data.project_name);
-                $('#client').text(data.client);
-                $('#signature').attr('src', data.signature);
-                $('#signatureName').text(`(${data.name})`);
-                $('#signatureDate').text(formatDate(data.date_submission));
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadData();
+            setDocYearNumber();
+            window.print();
+        });
 
-                let totalAmount = 0;
+        function loadData() {
+            let data = JSON.parse(localStorage.getItem("data"));
 
-                const mergedData = {};
+            $("#name").text(data.name);
+            $("#dept").text(data.dept);
+            $("#projectName").text(data.project_name);
+            $("#client").text(data.client);
+            $("#signature").attr("src", data.signature);
+            $("#signatureName").text(`(${data.name})`);
+            $("#signatureDate").text(formatDate(data.date_submission));
 
-                for (let i = 0; i < data.expanses.length; i++) {
-                    const item = data.expanses[i];
-                    
-                    if (i > 0) {
-                        const key = `${item.date}_${item.description}`;
-                        
-                        if (mergedData[key]) {
-                            mergedData[key].amount += parseInt(item.amount);
-                        } else {
-                            mergedData[key] = {
-                                date: item.date,
-                                description: item.description,
-                                amount: parseInt(item.amount),
-                                other: item.other,
-                                index: Object.keys(mergedData).length + 1
-                            };
+            const maxAmount = 40000;
+            const mergedData = {};
+
+            for (let i = 0; i < data.expanses.length; i++) {
+                const item = data.expanses[i];
+
+                const dateKey = item.date.replaceAll("-", "_");
+                const descKey = item.description.replaceAll(' ', '_').toLowerCase();
+                const key = `${dateKey}_${descKey}`;
+
+                if (mergedData[key]) {
+                    mergedData[key].amount += parseInt(item.amount);
+
+                    if (mergedData[key].amount > maxAmount) {
+                        if (descKey.includes("makan")) {
+                            mergedData[key].amount = maxAmount;
                         }
-                        
-                        totalAmount += parseInt(item.amount);
                     }
-                }
 
-                let tr = '';
-                for (const key in mergedData) {
-                    const item = mergedData[key];
-                    tr += `
-                        <tr>
-                            <td style="text-align: center;">${item.index}</td>
-                            <td>${formatDate(item.date)}</td>
-                            <td>${item.description}</td>
-                            <td>${formatRupiah(item.amount.toString())}</td>
-                            <td>${item.other}</td>
-                        </tr>
-                    `;
-                }
-
-                $('#tableExpanse tbody').prepend(tr);
-                $('#tableExpanse #totalExpanse').html(formatRupiah(totalAmount));
-
-                const groupedData = groupByDate(data.expanses);
-
-                let attachmentContainer = $('.attachment');
-                
-                $.each(groupedData, function(date, expanses) {
-                    let dateGroup = $('<div class="date-group" style="margin-bottom: 1rem;"></div>');
-                    let totalAmount = expanses.reduce((sum, expanse) => sum + parseFloat(expanse.amount), 0);
-                    let dateHeader = `<h3>Total per tanggal ${formatDate(date)} : ${formatRupiah(totalAmount)}</h3>`;
-
-                    dateGroup.append(dateHeader);
-
-                    let attachmentItem = $(`<div class="attachment-item" style="margin-top: 1rem;"></div>`);
-                    $.each(expanses, function(index, expanse) {
-                        if (expanse.attachment) {
-                            let imageElement = `<img src="${expanse.attachment}" alt="${expanse.description}" width="200px">`;
-                            attachmentItem.append(imageElement);
-                            dateGroup.append(attachmentItem);
+                    if (item.attachment) {
+                        if (!mergedData[key].attachments) {
+                            mergedData[key].attachments = [];
                         }
+                        mergedData[key].attachments.push(item.attachment);
+                    }
+                } else {
+                    let amount = parseInt(item.amount);
+                    if (amount > maxAmount && descKey.includes("makan")) {
+                        amount = maxAmount;
+                    }
+
+                    mergedData[key] = {
+                        date: item.date,
+                        description: item.description,
+                        amount: amount,
+                        other: item.other ? item.other : "",
+                        attachments: item.attachment ? [item.attachment] : [],
+                        index: Object.keys(mergedData).length,
+                    };
+                }
+            }
+
+            const sortedData = Object.values(mergedData).sort((a, b) => {
+                return new Date(a.date) - new Date(b.date);
+            });
+
+            let totalAmount = 0;
+            let tr = "";
+
+            sortedData.forEach((item, index) => {
+                tr += `
+                    <tr>
+                        <td style="text-align: center;">${index + 1}</td>
+                        <td>${formatDate(item.date)}</td>
+                        <td>${item.description}</td>
+                        <td>${formatRupiah(item.amount.toString())}</td>
+                        <td>${item.other}</td>
+                    </tr>
+                `;
+                totalAmount += item.amount;
+            });
+
+            $("#tableExpanse tbody").prepend(tr);
+            $("#tableExpanse #totalExpanse").html(formatRupiah(totalAmount));
+
+            const groupedByDate = {};
+
+            for (const key in mergedData) {
+                const item = mergedData[key];
+                const dateKey = item.date;
+
+                if (!groupedByDate[dateKey]) {
+                    groupedByDate[dateKey] = {
+                        totalAmount: 0,
+                        attachments: [],
+                    };
+                }
+
+                groupedByDate[dateKey].totalAmount += item.amount;
+                groupedByDate[dateKey].attachments.push(...item.attachments);
+            }
+
+            let attachmentContainer = $(".attachment");
+            attachmentContainer.empty();
+
+            for (const date in groupedByDate) {
+                const group = groupedByDate[date];
+
+                let dateGroup = $(`
+                    <div class="date-group" style="margin-bottom: 1rem; padding: .8rem; border: 1px solid rgb(36 36 36 / 31%); page-break-inside: avoid;">
+                        <h3 class="bg-header">Total per tanggal ${formatDate(date)}: ${formatRupiah(group.totalAmount.toString())}</h3>
+                    </div>
+                `);
+
+                if (group.attachments.length > 0) {
+                    let attachmentItem = $(
+                        '<div class="attachment-item" style="margin-top: 1rem; page-break-before: auto;"></div>'
+                    );
+
+                    group.attachments.forEach((attachment, idx) => {
+                        if (idx > 0 && idx % 6 === 0) {
+                            attachmentItem.append(
+                                '<div style="page-break-after: always;"></div>'
+                            );
+                        }
+
+                        attachmentItem.append(
+                            `<img src="${attachment}" style="width: 200px; margin-right: 10px; margin-bottom: 10px; page-break-inside: avoid;">`
+                        );
                     });
 
-                    attachmentContainer.append(dateGroup);
-                });
-            }
-
-            function groupByDate(expanses) {
-                return expanses.filter(Boolean).reduce((acc, expanse) => {
-                    const date = expanse.date;
-                    if (!acc[date]) {
-                        acc[date] = [];
-                    }
-                    acc[date].push(expanse);
-                    return acc;
-                }, {});
-            }
-
-            function formatDate(dateString) {
-                if (dateString) {
-                    const dateParts = dateString.split('-');
-                    const year = dateParts[0].slice(-2);
-                    const month = dateParts[1];
-                    const day = dateParts[2];
-                    return `${day}/${month}/${year}`;
+                    dateGroup.append(attachmentItem);
                 }
-            }
 
-            function formatRupiah(amount) {
-                if (amount) {
-                    return new Intl.NumberFormat('id-ID', {
-                        style: 'currency',
-                        currency: 'IDR',
-                        minimumFractionDigits: 0
-                    }).format(amount).replace('Rp', 'Rp. ');
-                }
+                attachmentContainer.append(dateGroup);
             }
-            
-            function setDocYearNumber() {
-                let year = new Date();
-                let yearSplit = year.getFullYear();
-                $('.doc-year').text(yearSplit.toString().slice(2, 4));
-            }
+        }
 
-        </script>
-    </body>
+        function formatDate(dateString) {
+            if (dateString) {
+                const dateParts = dateString.split("-");
+                const year = dateParts[0].slice(-2);
+                const month = dateParts[1];
+                const day = dateParts[2];
+                return `${day}/${month}/${year}`;
+            }
+        }
+
+        function formatRupiah(amount) {
+            if (amount) {
+                return new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                }).format(amount).replace("Rp", "Rp. ");
+            }
+        }
+
+        function setDocYearNumber() {
+            let year = new Date();
+            let yearSplit = year.getFullYear();
+            $(".doc-year").text(yearSplit.toString().slice(2, 4));
+        }
+    </script>
+</body>
 
 </html>
